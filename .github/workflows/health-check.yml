@@ -4,11 +4,14 @@ name: Scheduled Health Check
 on:
   schedule:
     - cron: "30 * * * *"
+  workflow_dispatch:
 
 jobs:
   health_check_job:
     runs-on: ubuntu-latest
     name: Check all sites
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Run Shell Script
